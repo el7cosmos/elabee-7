@@ -1,0 +1,5 @@
+name = eL Abee Facebook
+description = Facebook integration
+core = 7.x
+package = eL Abee
+features[features_api][] = api:2

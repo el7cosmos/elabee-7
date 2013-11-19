@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Implements hook_pathauto_alias_alter().
+ */
+function elabee_pathauto_pathauto_alias_alter(&$alias, array &$context) {
+  $context['language'] = LANGUAGE_NONE;
+}

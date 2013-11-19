@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function elabee_facebook_menu() {
+  $items = array();
+  $items['channel/%'] = array(
+    'page callback' => 'elabee_facebook_channel',
+    'page arguments' => array(1),
+    'delivery callback' => 'elabee_facebook_delivery_channel',
+    'access callback' => TRUE,
+    'file' => 'elabee_facebook.pages.inc',
+    'file path' => drupal_get_path('module', 'elabee_facebook') . '/includes',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_page_build().
+ */
+function elabee_facebook_page_build(&$page) {
+  if (!path_is_admin(current_path())) {
+    global $language;
+
+    $data = array(
+      'elabeeFacebook' => array(
+        'facebookLocalization' => elabee_facebook_localization(),
+        'facebookAppId' => variable_get('facebook_app_id'),
+        'facebookChannelUrl' => url('channel/' . $language->language, array('absolute' => TRUE)),
+      ),
+    );
+
+    $js = array();
+    $js[] = array(
+      'data' => $data,
+      'type' => 'setting',
+    );
+    $js[drupal_get_path('module', 'elabee_facebook') . '/elabee_facebook.js'] = array(
+      'type' => 'file',
+      'scope' => 'footer',
+    );
+
+    $page['page_bottom']['fb_root'] = array(
+      '#markup' => '<div id="fb-root"></div>',
+    );
+    $page['page_bottom']['fb_root']['#attached']['js'] = $js;
+  }
+}
+
+function elabee_facebook_localization() {
+  global $language;
+
+  $localization = array(
+    'en' => 'en_US',
+    'id' => 'id_ID',
+  );
+  $localization[LANGUAGE_NONE] = 'en_US';
+
+  return empty($language->language) ? 'en_US' : $localization[$language->language];
+}

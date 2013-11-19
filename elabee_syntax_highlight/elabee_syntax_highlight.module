@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Drupal needs this blank file.
+ */
+
+
+/**
+ * Implements hook_node_view().
+ */
+function elabee_syntax_highlight_node_view($node, $view_mode, $langcode) {
+  if ($view_mode == 'full' && !empty($node->field_syntax_highlighting) && $node->field_syntax_highlighting[LANGUAGE_NONE][0]['value']) {
+    drupal_add_css(drupal_get_path('module', 'elabee_syntax_highlight') . '/pygments-manni.css');
+  }
+}

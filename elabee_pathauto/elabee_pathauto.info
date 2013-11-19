@@ -1,0 +1,5 @@
+name = eL Abee Pathauto
+description = Extend pathauto module.
+core = 7.x
+package = eL Abee
+dependencies[] = pathauto

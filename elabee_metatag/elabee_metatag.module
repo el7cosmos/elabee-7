@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Implements hook_node_view().
+ */
+function elabee_metatag_node_view($node, $view_mode, $langcode) {
+  if ($view_mode == 'full' && !empty($node->field_image)) {
+    $width = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'twitter:image:width',
+        'content' => $node->field_image[LANGUAGE_NONE][0]['width'],
+      ),
+    );
+    $height = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'twitter:image:height',
+        'content' => $node->field_image[LANGUAGE_NONE][0]['height'],
+      ),
+    );
+
+    drupal_add_html_head($width, 'elabee_metatag_twitter_cards_image_width');
+    drupal_add_html_head($height, 'elabee_metatag_twitter_cards_image_height');
+  }
+}
