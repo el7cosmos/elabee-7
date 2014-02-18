@@ -41,7 +41,6 @@ class NodeTypeQuery extends EntityFieldQuery {
     $this
       ->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', $type)
-      ->propertyCondition('promote', 1)
       ->propertyCondition('status', 1)
       ->propertyOrderBy('sticky', 'DESC')
       ->propertyOrderBy('created', 'DESC')
