@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * eL Abee Node module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function elabee_menu() {
+  foreach (node_type_get_names() as $type => $name) {
+    if (variable_get('node_submitted_' . $type, FALSE)) {
+      $items[$type] = array(
+        'title' => $name,
+        'page callback' => 'elabee_node_type_page',
+        'page arguments' => array($type),
+        'access arguments' => array('access content'),
+        'file' => 'elabee.node.inc',
+      );
+      $items[$type . '/rss.xml'] = array(
+        'title' => $name,
+        'page callback' => 'elabee_node_type_feed',
+        'page arguments' => array($type),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+        'file' => 'elabee.node.inc',
+      );
+    }
+  }
+
+  return $items;
+}

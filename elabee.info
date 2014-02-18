@@ -1,0 +1,4 @@
+name = eL Abee
+description = Custom module for eL Abee
+core = 7.x
+package = eL Abee
