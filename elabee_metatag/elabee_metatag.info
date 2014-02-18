@@ -2,4 +2,4 @@ name = eL Abee Metatag
 description = Custom metatag
 core = 7.x
 package = eL Abee
-features[features_api][] = api:2
+dependencies[] = metatag
